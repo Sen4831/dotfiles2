@@ -1,11 +1,11 @@
 #!/bin/bash
 
 {{ if eq .chezmoi.osRelease.idLike "arch" -}}
-  pacman -Syu
+  sudo pacman -Syu
 
   {{ if .devpod -}}
     {{ range .packages.devpod.arch.pacman -}}
-      pacman -S {{ . | quote }}
+      sudo pacman -S {{ . | quote }}
     {{ end -}}
   {{ end -}}
 {{ end -}}
