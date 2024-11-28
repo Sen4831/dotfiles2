@@ -1,0 +1,6 @@
+{{- $devpod:= env "DEVPOD" | not | not -}}
+
+[data]
+  name = "Xddi"
+  devpod = {{ $devpod }}
+

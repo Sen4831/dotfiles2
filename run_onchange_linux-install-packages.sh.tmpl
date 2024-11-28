@@ -1,0 +1,10 @@
+{{ if eq .chezmoi.osRelease.idLike "arch" -}}
+  pacman -Syu
+
+  {{ if .devpod -}}
+    {{ range .packages.devpod.arch.pacman -}}
+      pacman -S {{ . | quote }}
+    {{ end -}}
+  {{ end -}}
+{{ end -}}
+

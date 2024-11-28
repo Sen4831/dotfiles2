@@ -1,0 +1,19 @@
+packages:
+  # Server machine
+  server:
+  
+  # Workstation machine
+  system:
+    arch:
+      pacman:
+        - 'zsh'
+        - 'fzf'
+        - 'docker'
+        - 'docker-compose'
+  
+  # Devpod container
+  devpod:
+    arch:
+      pacman:
+        - 'zsh'
+
