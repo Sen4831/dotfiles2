@@ -1,4 +1,5 @@
 {{- $devpod:= env "DEVPOD" | not | not -}}
+sourceDir = {{ .chezmoi.sourceDir | quote }}
 
 [data]
   name = "Xddi"
