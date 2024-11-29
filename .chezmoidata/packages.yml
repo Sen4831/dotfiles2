@@ -4,7 +4,7 @@ packages:
   
   # Workstation machine
   system:
-    arch:
+    manjaro:
       pacman:
         - 'zsh'
         - 'fzf'
@@ -13,7 +13,7 @@ packages:
   
   # Devpod container
   devpod:
-    arch:
-      pacman:
+    debian:
+      apt:
         - 'zsh'
 
