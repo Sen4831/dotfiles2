@@ -1,6 +1,6 @@
 #!/bin/bash
 
-{{ if eq .chezmoi.osRelease.os "manjaro" -}}
+{{ if eq .chezmoi.osRelease.id "manjaro" -}}
   sudo pacman -Syu
 
   {{ if .devpod -}}
@@ -10,7 +10,7 @@
   {{ end -}}
 {{ end -}}
 
-{{ if eq .chezmoi.osRelease.os "debian" -}}
+{{ if eq .chezmoi.osRelease.id "debian" -}}
   sudo apt-get update
   
   {{ if .devpod -}}
