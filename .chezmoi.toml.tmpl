@@ -1,7 +1,38 @@
-{{- $devpod:= env "DEVPOD" | not | not -}}
+{{- $interactive := stdinIsATTY -}}
+
+{{- $name := "Dummy" -}}
+{{- if hasKey . "name" -}}
+{{-   $name := .name -}}
+{{- else if (env "GIT_CONFIG_USER_NAME") -}}
+{{-   $name := env "GIT_CONFIG_USER_NAME" -}}
+{{- else if $interactive -}}
+{{-   $name := promptStringOnce . "name" "Git config user name" -}}
+{{- end -}}
+
+{{- $email := "dummy@dummy.dummy" -}}
+{{- if hasKey . "email" -}}
+{{-   $email := .email -}}
+{{- else if (env "GIT_CONFIG_USER_EMAIL") -}}
+{{-   $email := env "GIT_CONFIG_USER_EMAIL" -}}
+{{- else if $interactive -}}
+{{-   $email := promptStringOnce . "email" "Git config user email" -}}
+{{- end -}}
+
+{{- $osId:= .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osId:= printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
+{{- $isContainer:= false -}}
+{{- if or (env "DEVPOD") (env "CODESPACES") -}}
+{{-   $isContainer:= true }}
+{{- end -}}
+
 sourceDir = {{ .chezmoi.sourceDir | quote }}
 
 [data]
-  name = "Xddi"
-  devpod = {{ $devpod }}
+  name = {{ $name | quote }}
+  email = {{ $email | quote }}
+  osId = {{ $osId | quote }}
+  isContainer = {{ $isContainer }}
 

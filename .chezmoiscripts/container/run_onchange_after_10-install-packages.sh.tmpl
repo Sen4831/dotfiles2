@@ -1,0 +1,14 @@
+{{ if eq .osId "linux-debian" -}}
+#!/bin/sh
+
+# Installing packages
+sudo apt-get update
+sudo apt-get install zsh tmux fzf ripgrep cmake
+
+# Installing latest Neovim
+git clone https://github.com/neovim/neovim
+cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
+cd build && cpack -G DEB && sudo dpkg -i --force-overwrite nvim-linux64.deb
+
+{{ end -}}
+
