@@ -3,12 +3,11 @@
 
 # Installing packages
 sudo apt-get update
-sudo apt-get install zsh tmux fzf ripgrep cmake
+sudo apt-get install -y zsh tmux fzf ripgrep
 
 # Installing latest Neovim
-git clone https://github.com/neovim/neovim
-cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
-cd build && cpack -G DEB && sudo dpkg -i --force-overwrite nvim-linux64.deb
+curl -sL https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz \
+  | sudo tar -xzf - --strip-components=1 --overwrite -C /usr
 
 {{ end -}}
 

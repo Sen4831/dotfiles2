@@ -1,0 +1,19 @@
+FROM debian:bookworm
+
+ENV DEVPOD="true"
+
+RUN apt-get update && \
+    apt-get install -y sudo curl && \
+    useradd -rm -d /home/test -s /bin/bash test && \
+    usermod -aG sudo test && \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+COPY . /home/test/dotfiles
+
+RUN chown -R test:test /home/test/dotfiles && \
+    chmod +x /home/test/dotfiles/install.sh
+
+USER test
+
+RUN /home/test/dotfiles/install.sh
+

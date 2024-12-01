@@ -2,30 +2,30 @@
 
 {{- $name := "Dummy" -}}
 {{- if hasKey . "name" -}}
-{{-   $name := .name -}}
+{{-   $name = .name -}}
 {{- else if (env "GIT_CONFIG_USER_NAME") -}}
-{{-   $name := env "GIT_CONFIG_USER_NAME" -}}
+{{-   $name = env "GIT_CONFIG_USER_NAME" -}}
 {{- else if $interactive -}}
-{{-   $name := promptStringOnce . "name" "Git config user name" -}}
+{{-   $name = promptStringOnce . "name" "Git config user name" -}}
 {{- end -}}
 
 {{- $email := "dummy@dummy.dummy" -}}
 {{- if hasKey . "email" -}}
-{{-   $email := .email -}}
+{{-   $email = .email -}}
 {{- else if (env "GIT_CONFIG_USER_EMAIL") -}}
-{{-   $email := env "GIT_CONFIG_USER_EMAIL" -}}
+{{-   $email = env "GIT_CONFIG_USER_EMAIL" -}}
 {{- else if $interactive -}}
-{{-   $email := promptStringOnce . "email" "Git config user email" -}}
+{{-   $email = promptStringOnce . "email" "Git config user email" -}}
 {{- end -}}
 
-{{- $osId:= .chezmoi.os -}}
-{{- if hasKey .chezmoi.osRelease "id" -}}
-{{-   $osId:= printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- $osId := .chezmoi.os -}}
+{{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
+{{-   $osId = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
 {{- end -}}
 
 {{- $isContainer:= false -}}
 {{- if or (env "DEVPOD") (env "CODESPACES") -}}
-{{-   $isContainer:= true }}
+{{-   $isContainer = true }}
 {{- end -}}
 
 sourceDir = {{ .chezmoi.sourceDir | quote }}
