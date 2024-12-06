@@ -23,7 +23,7 @@
 {{-   $osId = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
 {{- end -}}
 
-{{- $isContainer:= false -}}
+{{- $isContainer := false -}}
 {{- if or (env "DEVPOD") (env "CODESPACES") -}}
 {{-   $isContainer = true }}
 {{- end -}}

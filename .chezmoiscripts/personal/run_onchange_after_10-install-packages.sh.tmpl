@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+{{ if eq .osId "linux-arch" "linux-manjaro" -}}
+
+# Update packages
+sudo pacman -Syu --noconfirm --needed
+
+{{ $installer := "sudo pacman -S --noconfirm --needed" -}}
+
+# Install GPU drivers
+{{ $installer }} nvidia nvidia-utils
+
+# Install sound drivers
+{{ $installer }} pipewire pipewire-alsa pipewire-pulse
+
+# Install wayland
+{{ $installer }} wayland xorg-xwayland
+
+
+# Install main packages
+{{ $installer }} git zsh tmux zellij docker docker-compose openssh flatpak
+
+# Install cli tools
+{{ $installer }} fzf ripgrep bat exa ranger
+
+# Install dev tools
+{{ $installer }} neovim httpie
+
+# Install window manager
+{{ $installer }} hyprland hyprlock hyprpaper rofi-wayland waybar
+
+# Install gui tools
+{{ $installer }} kitty
+
+{{ else -}}
+
+echo "Current OS is not supported."
+exit 1
+
+{{ end -}}
+

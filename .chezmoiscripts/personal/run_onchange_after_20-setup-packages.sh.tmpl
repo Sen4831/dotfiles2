@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -eufo pipefail
+
+# Setup shell
+sudo chsh -s /bin/zsh
+
+# Setup nvim
+nvim --headless "+Lazy! sync" +qa
+
+# Setup docker
+sudo usermod -aG docker ${USER}
+

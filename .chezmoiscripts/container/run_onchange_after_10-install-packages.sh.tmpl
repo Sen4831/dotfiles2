@@ -1,13 +1,21 @@
-{{ if eq .osId "linux-debian" -}}
 #!/bin/sh
+
+set -eufo pipefail
+
+{{ if eq .osId "linux-debian" -}}
 
 # Installing packages
 sudo apt-get update
-sudo apt-get install -y zsh tmux fzf ripgrep
+sudo apt-get install -y bash zsh tmux fzf ripgrep
 
 # Installing latest Neovim
 curl -sL https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz \
   | sudo tar -xzf - --strip-components=1 --overwrite -C /usr
+
+{{ else -}}
+
+echo "Current OS is not supported."
+exit 1
 
 {{ end -}}
 

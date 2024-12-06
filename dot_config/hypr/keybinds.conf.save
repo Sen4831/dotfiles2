@@ -1,0 +1,19 @@
+$mainMod = SUPER
+
+# Window actions
+bind = $mainMod, Q, killactive,
+bind = $mainMod, F, togglefloating,
+bind = $mainMod, P, pseudo, # dwindle
+bind = $mainMod, T, togglesplit, # dwindle
+
+# Move focus with mainMod + vim keys
+bind = $mainMod, H, movefocus, l
+bind = $mainMod, L, movefocus, r
+bind = $mainMod, K, movefocus, u
+bind = $mainMod, J, movefocus, d
+
+# Move windows with mainMod + SHIFT + vim keys
+bind = $mainMod SHIFT, H, movewindow, l
+bind = $mainMod SHIFT, L, movewindow, r
+bind = $mainMod SHIFT, K, movewindow, u
+bind = $mainMod SHIFT, J, movewindow, d
